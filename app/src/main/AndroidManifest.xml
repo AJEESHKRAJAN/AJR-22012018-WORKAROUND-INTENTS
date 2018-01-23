@@ -12,6 +12,7 @@
         <activity
             android:name=".IntentMasterActivity"
             android:label="@string/app_name"
+            android:launchMode="singleTop"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -19,6 +20,15 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".OtherActivity"
+            android:label="@string/title_activity_other"
+            android:theme="@style/AppTheme.NoActionBar" />
+
+        <service
+            android:name=".Services.InstantService"
+            android:enabled="true"
+            android:exported="true"></service>
     </application>
 
 </manifest>

@@ -7,4 +7,19 @@
         android:orderInCategory="100"
         android:title="@string/action_settings"
         app:showAsAction="never" />
+    <item
+        android:id="@+id/menuShowOtherActivity"
+        android:title="@string/show_other_activity" />
+    <item
+        android:id="@+id/menuRunService"
+        android:title="@string/run_a_service" />
+    <item
+        android:id="@+id/menuShowHelloWorld"
+        android:title="@string/show_hello_world" />
+    <item
+        android:id="@+id/menuShowPSHomePage"
+        android:title="@string/show_ps_home_page" />
+    <item
+        android:id="@+id/menuQuit"
+        android:title="@string/exit" />
 </menu>

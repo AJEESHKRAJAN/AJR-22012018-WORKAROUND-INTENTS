@@ -1,5 +1,11 @@
 <resources>
     <string name="app_name">AJR-22012018-WORKAROUND-INTENTS</string>
     <string name="action_settings">Settings</string>
-    <string name="master_page_title_show_text">An Android application for working with intents. Dated : 22-Jan-2018 07:00 PM</string>
+    <string name="master_page_title_show_text">An Android application for working with intents.\nDated : 22-Jan-2018 07:00 PM \n</string>
+    <string name="show_other_activity">Show Other Activity</string>
+    <string name="run_a_service">Run a Service!</string>
+    <string name="show_hello_world">Show Hello World</string>
+    <string name="show_ps_home_page">Show PS Home Page</string>
+    <string name="exit">Exit</string>
+    <string name="title_activity_other">OtherActivity</string>
 </resources>
