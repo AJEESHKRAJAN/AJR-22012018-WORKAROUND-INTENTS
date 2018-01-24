@@ -12,6 +12,10 @@ import com.workaround.ajeesh.ajr_22012018_workaround_intents.Helpers.LogHelper;
 import com.workaround.ajeesh.ajr_22012018_workaround_intents.IntentMasterActivity;
 import com.workaround.ajeesh.ajr_22012018_workaround_intents.R;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
+
 public class InstantService extends Service {
     int hitCount;
     String logName = "WWI-SVC-INSTNT";
@@ -36,6 +40,25 @@ public class InstantService extends Service {
     public int onStartCommand(Intent intent, int flags, int startId) {
         hitCount++;
         LogHelper.LogThreadId(logName, "Service hit count: " + hitCount);
+        SimpleDateFormat simpleDateFormat = null;
+
+        LogHelper.LogThreadId(logName, "Called process achieved in aTwo app");
+        String implicitIntentAction = intent.getAction();
+        if (implicitIntentAction != null) {
+            if (implicitIntentAction.equals("com.workaround.ajeesh.ajr_22012018_workaround_intents.action.LOG_TIME")) {
+                simpleDateFormat = new SimpleDateFormat("HH:mm:ss", Locale.getDefault());
+            } else if (implicitIntentAction.equals("com.workaround.ajeesh.ajr_22012018_workaround_intents.action.LOG_DATE")) {
+                simpleDateFormat = new SimpleDateFormat("yyyy:mm:dd", Locale.getDefault());
+            } else {
+                LogHelper.LogThreadId(logName, "Missing or unrecognized action");
+            }
+        }
+
+        if (simpleDateFormat != null) {
+            long currentDateTime = new Date().getTime();
+            LogHelper.LogThreadId(logName, "Current time now is : " + currentDateTime);
+            LogHelper.LogThreadId(logName, "Simple Date Format is : " + simpleDateFormat.format(currentDateTime));
+        }
         return START_NOT_STICKY;
     }
 

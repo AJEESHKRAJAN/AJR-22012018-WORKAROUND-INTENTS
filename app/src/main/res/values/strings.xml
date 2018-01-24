@@ -8,4 +8,5 @@
     <string name="show_ps_home_page">Show PS Home Page</string>
     <string name="exit">Exit</string>
     <string name="title_activity_other">OtherActivity</string>
+    <string name="title_activity_show_hello_world">ActivityShowHelloWorld</string>
 </resources>

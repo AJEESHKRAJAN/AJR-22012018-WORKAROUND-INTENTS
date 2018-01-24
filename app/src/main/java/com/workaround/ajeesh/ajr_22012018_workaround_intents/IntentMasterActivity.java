@@ -1,6 +1,8 @@
 package com.workaround.ajeesh.ajr_22012018_workaround_intents;
 
+import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -14,6 +16,7 @@ import android.widget.TextView;
 import com.workaround.ajeesh.ajr_22012018_workaround_intents.Helpers.LogHelper;
 import com.workaround.ajeesh.ajr_22012018_workaround_intents.Services.InstantService;
 
+import java.net.URI;
 import java.text.SimpleDateFormat;
 import java.util.Locale;
 
@@ -73,10 +76,10 @@ public class IntentMasterActivity extends AppCompatActivity {
                 onClickServiceRun(item);
                 break;
             case R.id.menuShowHelloWorld:
-                //onClickActivityShowOther(item);
+                onClickActivityShowHelloWorld(item);
                 break;
             case R.id.menuShowPSHomePage:
-                //onClickActivityShowOther(item);
+                onClickActivityShowPSHomePage(item);
                 break;
             case R.id.menuQuit:
                 onClickMenuExit(item);
@@ -89,6 +92,18 @@ public class IntentMasterActivity extends AppCompatActivity {
         return hanlded;
     }
 
+    private void onClickActivityShowPSHomePage(MenuItem item) {
+        Intent intent = new Intent("android.intent.action.VIEW");
+        Uri uri = Uri.parse("http://www.pluralsight-training.net");
+        intent.setData(uri);
+        startActivity(intent);
+    }
+
+    private void onClickActivityShowHelloWorld(MenuItem item) {
+        Intent intent = new Intent(this, ActivityShowHelloWorld.class);
+        startActivity(intent);
+    }
+
 
     private void onClickActivityShowOther(MenuItem item) {
         Intent intent = new Intent(this, OtherActivity.class);
@@ -96,7 +111,10 @@ public class IntentMasterActivity extends AppCompatActivity {
     }
 
     private void onClickServiceRun(MenuItem item) {
-        Intent serviceIntent = new Intent(this, InstantService.class);
+        //Intent serviceIntent = new Intent(this, InstantService.class);
+        Intent serviceIntent = new Intent("com.workaround.ajeesh.ajr_22012018_workaround_intents.action.LOG_TIME");
+        LogHelper.LogThreadId(logName, "Package Name:" + this.getPackageName());
+        serviceIntent.setPackage(this.getPackageName());
         startService(serviceIntent);
     }
 
