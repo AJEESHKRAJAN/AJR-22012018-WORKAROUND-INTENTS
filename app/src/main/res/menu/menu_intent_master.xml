@@ -20,6 +20,12 @@
         android:id="@+id/menuShowPSHomePage"
         android:title="@string/show_ps_home_page" />
     <item
+        android:id="@+id/menuCreatePendingIntents"
+        android:title="@string/create_pending_intent" />
+    <item
+        android:id="@+id/menuShowWallpaperControlPanel"
+        android:title="@string/access_wallpaper_control_panel" />
+    <item
         android:id="@+id/menuQuit"
         android:title="@string/exit" />
 </menu>

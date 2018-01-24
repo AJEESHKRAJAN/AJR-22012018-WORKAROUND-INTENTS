@@ -9,4 +9,8 @@
     <string name="exit">Exit</string>
     <string name="title_activity_other">OtherActivity</string>
     <string name="title_activity_show_hello_world">ActivityShowHelloWorld</string>
+    <string name="title_activity_target_pending_intent">ActivityTargetPendingIntent</string>
+    <string name="create_pending_intent">Create Pending Intent</string>
+    <string name="empty_extras">Empty Extras</string>
+    <string name="access_wallpaper_control_panel">Access Wallpaper Control Panel</string>
 </resources>
