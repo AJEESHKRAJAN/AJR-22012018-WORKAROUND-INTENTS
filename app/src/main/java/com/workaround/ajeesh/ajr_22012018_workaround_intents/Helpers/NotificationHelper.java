@@ -18,8 +18,8 @@ public class NotificationHelper {
         mContext = context;
     }
 
-    public void createNotification(PendingIntent pendingIntent, int notificationIcon, int notificationId,
-                                   String notificationTitleText, String notificationBodyText) {
+    public void createNotification(PendingIntent pendingIntent, int notificationIcon, String notificationTitleText,
+                                   String notificationBodyText, int notificationId) {
         LogHelper.LogThreadId(logName, "The Notification builder received a pending intent : " + pendingIntent.toString());
 
         long notificationTimeStamp = System.currentTimeMillis();

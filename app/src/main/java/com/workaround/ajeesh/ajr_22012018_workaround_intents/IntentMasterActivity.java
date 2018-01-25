@@ -1,5 +1,6 @@
 package com.workaround.ajeesh.ajr_22012018_workaround_intents;
 
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
@@ -14,6 +15,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.workaround.ajeesh.ajr_22012018_workaround_intents.Helpers.LogHelper;
+import com.workaround.ajeesh.ajr_22012018_workaround_intents.Helpers.NotificationHelper;
 import com.workaround.ajeesh.ajr_22012018_workaround_intents.Services.InstantService;
 
 import java.net.URI;
@@ -22,12 +24,15 @@ import java.util.Locale;
 
 public class IntentMasterActivity extends AppCompatActivity {
     String logName = "WWI-MASTER-ACT";
+    int notificationIdA = 1000;
+    int notificationIdB = 1001;
+    NotificationHelper notificationHelper = new NotificationHelper(this);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_intent_master);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
 
@@ -41,14 +46,9 @@ public class IntentMasterActivity extends AppCompatActivity {
         masterPageTextView.append("Activity Created time: " + createdTime);
 
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
+        FloatingActionButton fab = findViewById(R.id.fab);
+        fab.setOnClickListener(view -> Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                .setAction("Action", null).show());
     }
 
     @Override
@@ -80,6 +80,9 @@ public class IntentMasterActivity extends AppCompatActivity {
                 break;
             case R.id.menuShowPSHomePage:
                 onClickActivityShowPSHomePage(item);
+                break;
+            case R.id.menuCreatePendingIntents:
+                onClickCreatePendingIntents(item);
                 break;
             case R.id.menuQuit:
                 onClickMenuExit(item);
@@ -126,4 +129,34 @@ public class IntentMasterActivity extends AppCompatActivity {
     protected void onNewIntent(Intent intent) {
         LogHelper.LogThreadId(logName, "A new intent created OnNewIntent: " + intent.toString());
     }
+
+
+    private void onClickCreatePendingIntents(MenuItem item) {
+        PendingIntent pA = createPa();
+        PendingIntent pB = createPb();
+
+        boolean isEqual = pA.equals(pB);
+        LogHelper.LogThreadId(logName, "PendingIntents are equal:" + (isEqual ? "YES" : "NO"));
+
+        notificationHelper.createNotification(pA, R.drawable.ic_new_ps_logo,
+                "Pending Intent A", "This is for Pending Intent A", notificationIdA);
+        notificationHelper.createNotification(pB, R.drawable.ic_new_ps_logo,
+                "Pending Intent B", "This is for Pending Intent B", notificationIdB);
+    }
+
+    private PendingIntent createPa() {
+        //Intent intent = new Intent(this, ActivityTargetPendingIntent.class);
+        Intent intent = new Intent("com.workaround.ajeesh.action.SHOW_TEST_ACTIVITY");
+        return PendingIntent.getActivity(this, 0, intent, 0);
+    }
+
+    private PendingIntent createPb() {
+        Intent intent = new Intent("com.workaround.ajeesh.action.SHOW_TEST_ACTIVITY");
+        intent.putExtra("Trainer", "Pluralsight");
+        intent.putExtra("Website", "www.pluralsight-training.net");
+
+        return PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+    }
+
+
 }
