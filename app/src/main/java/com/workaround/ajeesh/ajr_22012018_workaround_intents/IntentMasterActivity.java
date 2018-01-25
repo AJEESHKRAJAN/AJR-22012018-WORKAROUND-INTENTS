@@ -1,6 +1,8 @@
 package com.workaround.ajeesh.ajr_22012018_workaround_intents;
 
+import android.app.ActivityManager;
 import android.app.PendingIntent;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
@@ -20,6 +22,7 @@ import com.workaround.ajeesh.ajr_22012018_workaround_intents.Services.InstantSer
 
 import java.net.URI;
 import java.text.SimpleDateFormat;
+import java.util.List;
 import java.util.Locale;
 
 public class IntentMasterActivity extends AppCompatActivity {
@@ -83,6 +86,9 @@ public class IntentMasterActivity extends AppCompatActivity {
                 break;
             case R.id.menuCreatePendingIntents:
                 onClickCreatePendingIntents(item);
+                break;
+            case R.id.menuShowWallpaperControlPanel:
+                showWallpaperControlPanel(item);
                 break;
             case R.id.menuQuit:
                 onClickMenuExit(item);
@@ -156,6 +162,54 @@ public class IntentMasterActivity extends AppCompatActivity {
         intent.putExtra("Website", "www.pluralsight-training.net");
 
         return PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+    }
+
+
+    public void showWallpaperControlPanel(MenuItem item) {
+        try {
+            ComponentName wallpaperComponentName = getWallPaperServiceComponentName();
+
+            ActivityManager am = (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
+            PendingIntent wallpaperControlPanelPendingIntent =
+                    am.getRunningServiceControlPanel(wallpaperComponentName);
+
+            try {
+                wallpaperControlPanelPendingIntent.send();
+            } catch (PendingIntent.CanceledException e) {
+                e.printStackTrace();
+            }
+        } catch (Exception e) {
+            LogHelper.LogThreadId(logName, "Activity Manager: called exception as " + e.getMessage());
+        }
+
+    }
+
+    private ComponentName getWallPaperServiceComponentName() {
+        final String wallpaperServiceClassName = "com.android.internal.service.wallpaper.ImageWallpaper";
+        ComponentName wallpaperService = null;
+        int index = 1;
+        try {
+            ActivityManager am = (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
+            LogHelper.LogThreadId(logName, "Activity Manager: " + am.toString());
+
+            List<ActivityManager.RunningServiceInfo> services = am.getRunningServices(Integer.MAX_VALUE);
+            LogHelper.LogThreadId(logName, "Activity Manager: Running Services Count" + services.size());
+
+            for (ActivityManager.RunningServiceInfo theService : services) {
+                LogHelper.LogThreadId(logName,
+                        String.format(Locale.US, "Activity Manager: The Running Services of %d service is named as : %s ",
+                                index, theService.service));
+                if (wallpaperServiceClassName.equalsIgnoreCase(theService.service.getClassName())) {
+                    wallpaperService = theService.service;
+                    break;
+                }
+            }
+
+
+        } catch (Exception e) {
+            LogHelper.LogThreadId(logName, "Activity Manager: Exception message " + e.getMessage());
+        }
+        return wallpaperService;
     }
 
 
