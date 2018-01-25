@@ -15,4 +15,5 @@
     <string name="access_wallpaper_control_panel">Access Wallpaper Control Panel</string>
     <string name="intent_data_matching_tests">Data Tests - Intent Matching</string>
     <string name="title_activity_data_matching">DataActivityMatching</string>
+    <string name="title_activity_data_path_matching">DataPathMatchingActivity</string>
 </resources>

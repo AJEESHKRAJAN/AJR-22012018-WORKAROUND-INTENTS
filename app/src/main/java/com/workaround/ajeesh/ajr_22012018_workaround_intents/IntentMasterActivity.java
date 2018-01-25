@@ -227,7 +227,7 @@ public class IntentMasterActivity extends AppCompatActivity {
         TextView textView = findViewById(R.id.textViewDisplay);
 
         Intent intent = new Intent(Intent.ACTION_VIEW);
-        intent.setData(Uri.parse("https://stackoverflow.com"));
+        intent.setData(Uri.parse("https://stackoverflow.com/questions/abc789456138/"));
 
         getSupportedActivityForData = new DataIntentHelper(this).getMatchingActivityForGivenData(intent);
 
