@@ -13,5 +13,6 @@
     <string name="create_pending_intent">Create Pending Intent</string>
     <string name="empty_extras">Empty Extras</string>
     <string name="access_wallpaper_control_panel">Access Wallpaper Control Panel</string>
-    <string name="intent_data_matching_tests">Intent Data Matching Tests</string>
+    <string name="intent_data_matching_tests">Data Tests - Intent Matching</string>
+    <string name="title_activity_data_matching">DataActivityMatching</string>
 </resources>
