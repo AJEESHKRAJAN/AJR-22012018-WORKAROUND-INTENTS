@@ -26,6 +26,9 @@
         android:id="@+id/menuShowWallpaperControlPanel"
         android:title="@string/access_wallpaper_control_panel" />
     <item
+        android:id="@+id/menuDataMatchingIntent"
+        android:title="@string/intent_data_matching_tests" />
+    <item
         android:id="@+id/menuQuit"
         android:title="@string/exit" />
 </menu>

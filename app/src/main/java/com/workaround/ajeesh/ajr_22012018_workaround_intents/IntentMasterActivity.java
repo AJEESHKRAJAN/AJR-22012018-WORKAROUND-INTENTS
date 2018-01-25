@@ -1,10 +1,12 @@
 package com.workaround.ajeesh.ajr_22012018_workaround_intents;
 
 import android.app.ActivityManager;
+import android.app.AppOpsManager;
 import android.app.PendingIntent;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -16,6 +18,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
+import com.workaround.ajeesh.ajr_22012018_workaround_intents.Helpers.DataIntentHelper;
 import com.workaround.ajeesh.ajr_22012018_workaround_intents.Helpers.LogHelper;
 import com.workaround.ajeesh.ajr_22012018_workaround_intents.Helpers.NotificationHelper;
 import com.workaround.ajeesh.ajr_22012018_workaround_intents.Services.InstantService;
@@ -90,6 +93,9 @@ public class IntentMasterActivity extends AppCompatActivity {
             case R.id.menuShowWallpaperControlPanel:
                 showWallpaperControlPanel(item);
                 break;
+            case R.id.menuDataMatchingIntent:
+                onClickDataMatchingIntent(item);
+                break;
             case R.id.menuQuit:
                 onClickMenuExit(item);
                 break;
@@ -100,6 +106,7 @@ public class IntentMasterActivity extends AppCompatActivity {
 
         return hanlded;
     }
+
 
     private void onClickActivityShowPSHomePage(MenuItem item) {
         Intent intent = new Intent("android.intent.action.VIEW");
@@ -184,6 +191,7 @@ public class IntentMasterActivity extends AppCompatActivity {
 
     }
 
+    @SuppressWarnings("deprecation")
     private ComponentName getWallPaperServiceComponentName() {
         final String wallpaperServiceClassName = "com.android.internal.service.wallpaper.ImageWallpaper";
         ComponentName wallpaperService = null;
@@ -192,8 +200,10 @@ public class IntentMasterActivity extends AppCompatActivity {
             ActivityManager am = (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
             LogHelper.LogThreadId(logName, "Activity Manager: " + am.toString());
 
+            @SuppressWarnings("deprecation")
             List<ActivityManager.RunningServiceInfo> services = am.getRunningServices(Integer.MAX_VALUE);
             LogHelper.LogThreadId(logName, "Activity Manager: Running Services Count" + services.size());
+
 
             for (ActivityManager.RunningServiceInfo theService : services) {
                 LogHelper.LogThreadId(logName,
@@ -212,5 +222,15 @@ public class IntentMasterActivity extends AppCompatActivity {
         return wallpaperService;
     }
 
+    private void onClickDataMatchingIntent(MenuItem item) {
+        String getSupportedActivityForData = "";
+        TextView textView = findViewById(R.id.textViewDisplay);
 
+        Intent intent = new Intent(Intent.ACTION_VIEW);
+        intent.setData(Uri.parse("https://stackoverflow.com"));
+
+        getSupportedActivityForData = new DataIntentHelper(this).getMatchingActivityForGivenData(intent);
+
+        textView.setText(getSupportedActivityForData);
+    }
 }
