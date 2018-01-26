@@ -28,6 +28,9 @@
     <item
         android:id="@+id/menuDataMatchingIntent"
         android:title="@string/intent_data_matching_tests" />
+  <item
+        android:id="@+id/menuMonitorBatteryStatus"
+        android:title="@string/monitor_battery_status" />
     <item
         android:id="@+id/menuQuit"
         android:title="@string/exit" />

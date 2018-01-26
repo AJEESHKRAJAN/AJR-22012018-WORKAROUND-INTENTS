@@ -6,6 +6,7 @@ import android.app.PendingIntent;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
@@ -18,6 +19,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
+import com.workaround.ajeesh.ajr_22012018_workaround_intents.BroadcastReceivers.BatteryStatusReceiver;
 import com.workaround.ajeesh.ajr_22012018_workaround_intents.Helpers.DataIntentHelper;
 import com.workaround.ajeesh.ajr_22012018_workaround_intents.Helpers.LogHelper;
 import com.workaround.ajeesh.ajr_22012018_workaround_intents.Helpers.NotificationHelper;
@@ -96,6 +98,9 @@ public class IntentMasterActivity extends AppCompatActivity {
             case R.id.menuDataMatchingIntent:
                 onClickDataMatchingIntent(item);
                 break;
+            case R.id.menuMonitorBatteryStatus:
+                onClickMonitorBatteryStatus(item);
+                break;
             case R.id.menuQuit:
                 onClickMenuExit(item);
                 break;
@@ -106,7 +111,6 @@ public class IntentMasterActivity extends AppCompatActivity {
 
         return hanlded;
     }
-
 
     private void onClickActivityShowPSHomePage(MenuItem item) {
         Intent intent = new Intent("android.intent.action.VIEW");
@@ -232,5 +236,10 @@ public class IntentMasterActivity extends AppCompatActivity {
         getSupportedActivityForData = new DataIntentHelper(this).getMatchingActivityForGivenData(intent);
 
         textView.setText(getSupportedActivityForData);
+    }
+
+    private void onClickMonitorBatteryStatus(MenuItem item) {
+        BatteryStatusReceiver batteryStatusReceiver = new BatteryStatusReceiver();
+        registerReceiver(batteryStatusReceiver, new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
     }
 }

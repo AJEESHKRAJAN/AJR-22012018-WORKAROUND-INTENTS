@@ -16,4 +16,5 @@
     <string name="intent_data_matching_tests">Data Tests - Intent Matching</string>
     <string name="title_activity_data_matching">DataActivityMatching</string>
     <string name="title_activity_data_path_matching">DataPathMatchingActivity</string>
+    <string name="monitor_battery_status">Monitor Battery Status</string>
 </resources>
