@@ -28,9 +28,24 @@
     <item
         android:id="@+id/menuDataMatchingIntent"
         android:title="@string/intent_data_matching_tests" />
-  <item
+    <item
         android:id="@+id/menuMonitorBatteryStatus"
         android:title="@string/monitor_battery_status" />
+    <item
+        android:id="@+id/menuShowActivityIn5Seconds"
+        android:title="@string/show_activity_in_5_seconds" />
+    <item
+        android:id="@+id/menuOpenBrowserContent"
+        android:title="@string/browser_test" />
+    <item
+        android:id="@+id/menuOpenPhoneDial"
+        android:title="@string/phone_dial_test" />
+    <item
+        android:id="@+id/menuTakePicture"
+        android:title="@string/capture_a_pic" />
+    <item
+        android:id="@+id/menuFindContact"
+        android:title="@string/select_a_contact" />
     <item
         android:id="@+id/menuQuit"
         android:title="@string/exit" />

@@ -1,6 +1,7 @@
 package com.workaround.ajeesh.ajr_22012018_workaround_intents;
 
 import android.app.ActivityManager;
+import android.app.AlarmManager;
 import android.app.AppOpsManager;
 import android.app.PendingIntent;
 import android.content.ComponentName;
@@ -10,6 +11,7 @@ import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -100,6 +102,21 @@ public class IntentMasterActivity extends AppCompatActivity {
                 break;
             case R.id.menuMonitorBatteryStatus:
                 onClickMonitorBatteryStatus(item);
+                break;
+            case R.id.menuShowActivityIn5Seconds:
+                onClickShowActivityIn5Seconds(item);
+                break;
+            case R.id.menuOpenBrowserContent:
+                onClickOpenBrowserContent(item);
+                break;
+            case R.id.menuOpenPhoneDial:
+                onClickOpenPhoneDial(item);
+                break;
+            case R.id.menuTakePicture:
+                onClickTakePicture(item);
+                break;
+            case R.id.menuFindContact:
+                onClickFindContact(item);
                 break;
             case R.id.menuQuit:
                 onClickMenuExit(item);
@@ -241,5 +258,38 @@ public class IntentMasterActivity extends AppCompatActivity {
     private void onClickMonitorBatteryStatus(MenuItem item) {
         BatteryStatusReceiver batteryStatusReceiver = new BatteryStatusReceiver();
         registerReceiver(batteryStatusReceiver, new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
+    }
+
+    private void onClickShowActivityIn5Seconds(MenuItem item) {
+        Intent intent = new Intent("com.workaround.ajeesh.action.SHOW_TEST_ACTIVITY");
+        intent.putExtra("WierdValue", "Exclusive!!!!");
+
+        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, 0);
+
+        long alarmTime = SystemClock.elapsedRealtime() + 5000;
+        LogHelper.LogThreadId(logName, "Alarm Time: " + alarmTime);
+
+        AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+
+        if (alarmManager != null) {
+            LogHelper.LogThreadId(logName, "Alarm Manager: " + alarmManager.toString());
+            alarmManager.set(AlarmManager.ELAPSED_REALTIME, alarmTime, pendingIntent);
+        }
+    }
+
+    private void onClickOpenBrowserContent(MenuItem item) {
+        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.facebook.com/"));
+        startActivity(intent);
+    }
+
+    private void onClickOpenPhoneDial(MenuItem item) {
+        Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:9790793380"));
+        startActivity(intent);
+    }
+
+    private void onClickTakePicture(MenuItem item) {
+    }
+
+    private void onClickFindContact(MenuItem item) {
     }
 }

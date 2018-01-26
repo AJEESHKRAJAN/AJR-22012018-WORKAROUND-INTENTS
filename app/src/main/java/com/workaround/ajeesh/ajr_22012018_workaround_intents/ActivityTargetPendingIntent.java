@@ -1,5 +1,6 @@
 package com.workaround.ajeesh.ajr_22012018_workaround_intents;
 
+import android.content.ComponentName;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -36,9 +37,18 @@ public class ActivityTargetPendingIntent extends AppCompatActivity {
 
     private void showIntentInfo(Intent trgtIntent, TextView textViewTarget) {
         LogHelper.LogThreadId(logName, "Processing Intent info in target pending intents class.");
+
         StringBuilder infoBuilder = new StringBuilder();
+
+        ComponentName componentName = trgtIntent.getComponent();
+        if (componentName != null) {
+            infoBuilder.append("Component Name = ");
+            infoBuilder.append(componentName.toString());
+            infoBuilder.append("\n");
+        }
+
         String action = trgtIntent.getAction();
-        infoBuilder.append("Action=");
+        infoBuilder.append("Action = ");
         infoBuilder.append(action != null ? action : "** NO Action **");
         infoBuilder.append("\n");
 
@@ -51,11 +61,12 @@ public class ActivityTargetPendingIntent extends AppCompatActivity {
             for (String key : keySet) {
                 String value = extras.get(key).toString();
                 infoBuilder.append(key);
-                infoBuilder.append("=");
+                infoBuilder.append(" = ");
                 infoBuilder.append(value);
                 infoBuilder.append("\n");
             }
         }
+
         textViewTarget.setText(infoBuilder.toString());
     }
 

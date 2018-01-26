@@ -17,4 +17,9 @@
     <string name="title_activity_data_matching">DataActivityMatching</string>
     <string name="title_activity_data_path_matching">DataPathMatchingActivity</string>
     <string name="monitor_battery_status">Monitor Battery Status</string>
+    <string name="show_activity_in_5_seconds">Show activity in 5 seconds</string>
+    <string name="browser_test">Browser - Test</string>
+    <string name="phone_dial_test">Phone Dial - Test</string>
+    <string name="capture_a_pic">Capture a pic!!!</string>
+    <string name="select_a_contact">Select a contact!!!</string>
 </resources>
